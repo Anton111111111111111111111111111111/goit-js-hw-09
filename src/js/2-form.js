@@ -4,6 +4,14 @@ let formData = {
 };
 
 const formElem = document.querySelector('.feedback-form');
+
+const lsData = getFromLS('feedback-form-state');
+if (lsData) {
+  formData = lsData;
+  formElem.elements.email.value = lsData.email || '';
+  formElem.elements.message.value = lsData.message || '';
+}
+
 formElem.addEventListener('input', e => {
   const email = e.currentTarget.elements.email.value;
   const message = e.currentTarget.elements.message.value;
@@ -12,12 +20,6 @@ formElem.addEventListener('input', e => {
 
   saveToLS('feedback-form-state', formData);
 });
-
-const lsData = getFromLS('feedback-form-state');
-if (lsData) {
-  formElem.elements.email.value = lsData.email || '';
-  formElem.elements.message.value = lsData.message || '';
-}
 
 formElem.addEventListener('submit', e => {
   e.preventDefault();
