@@ -13,16 +13,11 @@ formElem.addEventListener('input', e => {
   saveToLS('feedback-form-state', formData);
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const lsData = getFromLS('feedback-form-state');
-  try {
-    formData = lsData;
-    formElem.elements.email.value = lsData.email;
-    formElem.elements.message.value = lsData.message;
-  } catch (error) {
-    console.log('Error');
-  }
-});
+const lsData = getFromLS('feedback-form-state');
+if (lsData) {
+  formElem.elements.email.value = lsData.email || '';
+  formElem.elements.message.value = lsData.message || '';
+}
 
 formElem.addEventListener('submit', e => {
   e.preventDefault();
@@ -32,7 +27,7 @@ formElem.addEventListener('submit', e => {
   ) {
     console.log(formData);
   } else {
-    console.log(`Input data`);
+    alert(`Input data`);
   }
 
   formElem.reset();
