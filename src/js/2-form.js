@@ -28,16 +28,15 @@ formElem.addEventListener('submit', e => {
     formElem.elements.message.value.trim() !== ''
   ) {
     console.log(formData);
+    formElem.reset();
+    localStorage.removeItem('feedback-form-state');
+    formData = {
+      email: '',
+      message: '',
+    };
   } else {
     alert(`Input data`);
   }
-
-  formElem.reset();
-  localStorage.removeItem('feedback-form-state');
-  formData = {
-    email: '',
-    message: '',
-  };
 });
 
 function saveToLS(key, value) {
